@@ -33,6 +33,49 @@ const features = [
   },
 ];
 
+const govTools = [
+  {
+    name: 'GOV.UK Pay',
+    description: 'Take and process payments for government services.',
+    href: 'https://www.payments.service.gov.uk/',
+  },
+  {
+    name: 'GOV.UK Notify',
+    description: 'Send emails, text messages, and letters to users.',
+    href: 'https://www.notifications.service.gov.uk/',
+  },
+  {
+    name: 'GOV.UK Forms',
+    description: 'No-code form builder for government services.',
+    href: 'https://www.forms.service.gov.uk/',
+  },
+  {
+    name: 'GOV.UK Prototype Kit',
+    description: 'Rapid prototyping toolkit for GOV.UK services.',
+    href: 'https://prototype-kit.service.gov.uk/docs/',
+  },
+  {
+    name: 'GOV.UK Frontend',
+    description: 'Components and styles for government services.',
+    href: 'https://frontend.design-system.service.gov.uk/',
+  },
+];
+
+const keyStandards = [
+  {
+    name: 'MoJ AI Governance Framework',
+    href: 'https://technical-guidance.service.justice.gov.uk/documentation/governance/ai-governance-framework.html#introduction',
+  },
+  {
+    name: 'Service Standard',
+    href: 'https://www.gov.uk/service-manual/service-standard',
+  },
+  {
+    name: 'Technology Code of Practice',
+    href: 'https://www.gov.uk/guidance/the-technology-code-of-practice',
+  },
+];
+
 const whatsNew = [
   {
     date: '2026-02-27',
@@ -86,6 +129,36 @@ export default function Home() {
             </div>
           ))}
         </div>
+      </section>
+
+      <section className="govuk-!-margin-top-6">
+        <h2 className="govuk-heading-l">Government tools &amp; services</h2>
+        <p className="govuk-body-l">
+          Real tools available to teams building government services — use them today.
+        </p>
+        <div className="app-cards">
+          {govTools.map((tool) => (
+            <div key={tool.name} className="app-card">
+              <h3 className="govuk-heading-s app-card__title">
+                <a href={tool.href} className="govuk-link app-card__title-link" rel="noopener noreferrer">
+                  {tool.name}
+                </a>
+              </h3>
+              <p className="govuk-body app-card__description">{tool.description}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="govuk-!-margin-top-6">
+        <h2 className="govuk-heading-l">Key standards</h2>
+        <ul className="govuk-list govuk-list--bullet">
+          {keyStandards.map((s) => (
+            <li key={s.name}>
+              <a href={s.href} className="govuk-link" rel="noopener noreferrer">{s.name}</a>
+            </li>
+          ))}
+        </ul>
       </section>
 
       <section className="govuk-!-margin-top-6">
