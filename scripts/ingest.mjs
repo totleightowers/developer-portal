@@ -236,7 +236,7 @@ function convertFile(file, source) {
 
   // 4. Convert tech-docs-template specific patterns
   if (isTechDocs) {
-    body = convertTechDocsPatterns(body);
+    body = convertTechDocsPatterns(body, source);
   }
 
   // 5. Reconstruct the file
@@ -266,15 +266,28 @@ function stripErb(content) {
     '\n> *Content from partial: $1*\n'
   );
 
+  // Remove now-empty markdown headings (e.g., "# " or "## ")
+  result = result.replace(/^(#{1,6})\s*$/gm, '');
+
   return result;
 }
 
 // ── Tech-docs-template pattern conversion ───────────────────────
-function convertTechDocsPatterns(body) {
-  // Convert [link text](/path.html) to [link text](/docs/path)
+function convertTechDocsPatterns(body, source) {
+  // Convert [link text](/path.html) to [link text](/docs/source-id/path)
+  // Also strip the docsPath prefix if it's in the link
+  const docsPath = source.docsPath ? source.docsPath.replace(/^source\//, '') : 'documentation';
+  
+  // First, convert internal links that include the docsPath prefix
   let result = body.replace(
+    new RegExp(`\\[([^\\]]+)\\]\\(\\/${docsPath.replace('/', '\\/')}\/([^)]+?)\\.html\\)`, 'g'),
+    `[$1](/docs/${source.id}/$2)`
+  );
+  
+  // Then convert any remaining /path.html links (that don't have the docsPath)
+  result = result.replace(
     /\[([^\]]+)\]\(\/([^)]+?)\.html\)/g,
-    '[$1](/docs/$2)'
+    `[$1](/docs/${source.id}/$2)`
   );
 
   // Remove .html extensions from internal links

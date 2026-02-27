@@ -1,8 +1,5 @@
 name: Ingest Preview (PR)
 
-permissions:
-  contents: read
-
 on:
   pull_request:
     branches: [main]
@@ -26,8 +23,8 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Ingest (dry run)
-        run: node scripts/ingest.mjs --dry-run
+      - name: Ingest content
+        run: node scripts/ingest.mjs
 
       - name: Build
         run: npm run build
