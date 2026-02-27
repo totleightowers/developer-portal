@@ -99,9 +99,10 @@
     "slug": "mom-design-system",
     "name": "Ministry of Magic Design System",
     "category": "tools",
-    "description": "Design patterns and components for Ministry of Magic services, extending the GOV.UK Design System with department-specific components.",
+    "description": "Design patterns and components for Ministry of Magic services, built for trust, clarity, and mission-critical delivery.",
     "owner": "Ministry of Magic Design",
-    "externalUrl": "https://github.com/totleightowers/developer-portal",
+    "docsUrl": "/products/mom-design-system/system",
+    "externalUrl": "/products/mom-design-system/system",
     "status": "live",
     "tags": ["design", "frontend", "patterns", "accessibility"]
   },
@@ -154,5 +155,25 @@
     "slackChannel": "#security-engineering",
     "status": "beta",
     "tags": ["security", "ci-cd", "scanning", "devsecops"]
+  },
+  {
+    "slug": "wardwall",
+    "name": "WardWall",
+    "category": "security",
+    "description": "Perimeter defence layer for Ministry services. Provides automated threat detection, hex-pattern filtering, and real-time containment breach alerts across all registered endpoints.",
+    "owner": "Arcane Security Operations",
+    "slackChannel": "#wardwall",
+    "status": "live",
+    "tags": ["security", "firewall", "threat-detection", "monitoring"]
+  },
+  {
+    "slug": "grimoire-vault",
+    "name": "Grimoire Vault",
+    "category": "security",
+    "description": "Secrets management and credential rotation service. Stores enchantment keys, ward tokens, and API credentials with automatic expiry enforcement and full audit logging.",
+    "owner": "Arcane Security Operations",
+    "slackChannel": "#grimoire-vault",
+    "status": "live",
+    "tags": ["security", "secrets", "credentials", "encryption"]
   }
 ]
