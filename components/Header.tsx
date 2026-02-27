@@ -43,7 +43,7 @@ export function Header() {
       <header className="govuk-header" role="banner" data-module="govuk-header">
         <div className="govuk-width-container govuk-header__container">
           <div className="govuk-header__logo">
-            <Link href="/" className="govuk-header__homepage-link">
+            <Link href="/" className="govuk-header__homepage-link" onClick={(e) => e.currentTarget.blur()}>
               <WizardHatIcon />
               <span className="app-header__org-name">MINISTRY OF MAGIC</span>
               <span className="govuk-header__product-name">Developer Portal</span>
