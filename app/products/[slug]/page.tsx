@@ -45,8 +45,14 @@ export default async function ProductDetailPage({ params }: { params: Promise<Pa
       .filter((source) => source.enabled !== false)
       .map((source) => source.id)
   );
-  const docsSourceId = product.docsUrl?.replace(/^\/docs\//, '').split('/')[0];
-  const hasValidDocsLink = Boolean(docsSourceId && sourceIds.has(docsSourceId));
+  const isDocsSourceLink = Boolean(product.docsUrl?.startsWith('/docs/'));
+  const docsSourceId = isDocsSourceLink
+    ? product.docsUrl?.replace(/^\/docs\//, '').split('/')[0]
+    : undefined;
+  const hasValidDocsLink = Boolean(
+    product.docsUrl && (!isDocsSourceLink || (docsSourceId && sourceIds.has(docsSourceId)))
+  );
+  const hasInternalServiceLink = Boolean(product.externalUrl?.startsWith('/'));
 
   const statusTag =
     product.status === 'live' ? (
@@ -102,10 +108,15 @@ export default async function ProductDetailPage({ params }: { params: Promise<Pa
                 View documentation
               </Link>
             )}
-            {product.externalUrl && (
+            {product.externalUrl && !hasInternalServiceLink && (
               <a href={product.externalUrl} className="govuk-button govuk-button--secondary" rel="noopener noreferrer">
                 Visit service
               </a>
+            )}
+            {product.externalUrl && hasInternalServiceLink && (
+              <Link href={product.externalUrl} className="govuk-button govuk-button--secondary">
+                Visit service
+              </Link>
             )}
           </div>
 

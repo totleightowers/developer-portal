@@ -12,6 +12,7 @@ A cross-government developer portal inspired by [Singapore's Government Develope
 - **Community** — links to Slack channels, open source, events
 - **AI chatbot** — contextual help assistant (mock responses in alpha)
 - **Full-text search** — powered by [Pagefind](https://pagefind.app/)
+- **Ministry of Magic Design System** — internal easter egg page showcasing a fictional design system for enchanted public services, with a subtle fade animation effect
 
 ## Tech stack
 

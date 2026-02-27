@@ -99,9 +99,10 @@
     "slug": "mom-design-system",
     "name": "Ministry of Magic Design System",
     "category": "tools",
-    "description": "Design patterns and components for Ministry of Magic services, extending the GOV.UK Design System with department-specific components.",
+    "description": "Design patterns and components for Ministry of Magic services, built for trust, clarity, and mission-critical delivery.",
     "owner": "Ministry of Magic Design",
-    "externalUrl": "https://github.com/totleightowers/developer-portal",
+    "docsUrl": "/products/mom-design-system/system",
+    "externalUrl": "/products/mom-design-system/system",
     "status": "live",
     "tags": ["design", "frontend", "patterns", "accessibility"]
   },

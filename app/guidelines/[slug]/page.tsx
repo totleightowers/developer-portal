@@ -111,7 +111,7 @@ Using the GOV.UK Design System and Frontend gives you a strong accessibility bas
 
 - [GOV.UK accessibility requirements](https://www.gov.uk/guidance/accessibility-requirements-for-public-sector-websites-and-apps)
 - [WCAG 2.2 quick reference](https://www.w3.org/WAI/WCAG22/quickref/)
-- [Ministry of Magic Design System](https://github.com/totleightowers/developer-portal)
+- [Ministry of Magic Design System](/products/mom-design-system/system)
   `,
 };
 
