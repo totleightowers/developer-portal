@@ -1,4 +1,5 @@
 // GOV.UK Frontend core
+// Assets path is set to relative so it works with Next.js basePath on GitHub Pages
 @use "govuk-frontend/dist/govuk" with (
   $govuk-assets-path: "/assets/",
   $govuk-global-styles: true
