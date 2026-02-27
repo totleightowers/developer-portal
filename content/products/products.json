@@ -106,6 +106,36 @@
     "tags": ["design", "frontend", "patterns", "accessibility"]
   },
   {
+    "slug": "govuk-frontend",
+    "name": "GOV.UK Frontend",
+    "category": "tools",
+    "description": "Implementation docs for the GOV.UK Design System components and styles.",
+    "owner": "GDS",
+    "externalUrl": "https://frontend.design-system.service.gov.uk/",
+    "status": "live",
+    "tags": ["design", "frontend", "components", "accessibility"]
+  },
+  {
+    "slug": "govuk-prototype-kit",
+    "name": "GOV.UK Prototype Kit",
+    "category": "tools",
+    "description": "Rapid prototyping toolkit for GOV.UK services.",
+    "owner": "GDS",
+    "externalUrl": "https://prototype-kit.service.gov.uk/docs/",
+    "status": "live",
+    "tags": ["prototyping", "design", "frontend"]
+  },
+  {
+    "slug": "govuk-forms",
+    "name": "GOV.UK Forms",
+    "category": "tools",
+    "description": "No-code form builder for government services.",
+    "owner": "GDS",
+    "externalUrl": "https://www.forms.service.gov.uk/",
+    "status": "live",
+    "tags": ["forms", "no-code", "service-design"]
+  },
+  {
     "slug": "potion-pricing-api",
     "name": "Potion Pricing API",
     "category": "apis",
