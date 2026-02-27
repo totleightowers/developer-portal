@@ -26,6 +26,16 @@ export default function SearchWidget() {
           // @ts-ignore — dynamic runtime import of generated pagefind bundle
           /* webpackIgnore: true */ pagefindPath
         );
+
+        const pagefindBasePath = `${basePath || ''}/pagefind/`;
+        const pagefindBaseUrl = basePath || '/';
+        if (typeof pf.options === 'function') {
+          await pf.options({
+            basePath: pagefindBasePath,
+            baseUrl: pagefindBaseUrl,
+          });
+        }
+
         setPagefind(pf);
       } catch {
         // Pagefind not available (dev mode) — search will show a message
