@@ -56,6 +56,11 @@ jobs:
             node scripts/ingest.mjs
           fi
 
+      - name: Set GOV.UK assets path for GitHub Pages
+        run: |
+          REPO_NAME="${GITHUB_REPOSITORY#*/}"
+          sed -i "s|\$govuk-assets-path: \"/assets/\"|\$govuk-assets-path: \"/${REPO_NAME}/assets/\"|" styles/globals.scss
+
       - name: Build static site
         run: npm run build
 
