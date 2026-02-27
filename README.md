@@ -6,9 +6,9 @@ A cross-government developer portal inspired by [Singapore's Government Develope
 
 ## What it does
 
-- **Product catalogue** — browse platforms, tools, and APIs available across government
+- **Product catalogue** — browse platforms, tools, and APIs available across government (mix of real MoJ platforms and whimsical Ministry of Magic services)
 - **Documentation hub** — technical docs ingested automatically from source repositories (Cloud Platform, Modernisation Platform, Analytical Platform)
-- **Guidelines** — standards and best practices organised by project lifecycle phase
+- **Guidelines** — standards and best practices organised by project lifecycle phase, linking out to real cross-government resources (Service Standard, Technology Code of Practice, NCSC guidance, MoJ AI Governance Framework, GOV.UK Design System, and more)
 - **Community** — links to Slack channels, open source, events
 - **AI chatbot** — contextual help assistant (mock responses in alpha)
 - **Full-text search** — powered by [Pagefind](https://pagefind.app/)
@@ -86,8 +86,26 @@ content/
 ├── products/
 │   └── products.json        # Product catalogue data
 └── guidelines/
-    └── guidelines.json      # Guidelines data
+    └── guidelines.json      # Guidelines data (internal + external links)
 ```
+
+### Guidelines: internal vs external
+
+Guidelines in `guidelines.json` can be either internal (rendered as portal pages) or external (linked out to the canonical source). An entry with an `externalUrl` field links directly — no internal page is generated.
+
+Current external links:
+
+| Phase | Resource | Source |
+|---|---|---|
+| Inception | [GOV.UK Service Manual](https://www.gov.uk/service-manual) | GDS |
+| Inception | [Service Standard](https://www.gov.uk/service-manual/service-standard) | GDS |
+| Development | [GDS API Technical & Data Standards](https://www.gov.uk/guidance/gds-api-technical-and-data-standards) | GDS |
+| Development | [NCSC Secure Development & Deployment](https://www.ncsc.gov.uk/collection/developers-collection) | NCSC |
+| Technology | [Technology Code of Practice](https://www.gov.uk/guidance/the-technology-code-of-practice) | CDDO |
+| Technology | [GOV.UK Design System](https://design-system.service.gov.uk/) | GDS |
+| Standards | [MoJ AI Governance Framework](https://technical-guidance.service.justice.gov.uk/documentation/governance/ai-governance-framework.html#introduction) | MoJ |
+| Standards | [NCSC Cloud Security Guidance](https://www.ncsc.gov.uk/collection/cloud-security) | NCSC |
+| Measuring | [Measuring service performance](https://www.gov.uk/service-manual/measuring-success) | GDS |
 
 ## Ingestion pipeline
 

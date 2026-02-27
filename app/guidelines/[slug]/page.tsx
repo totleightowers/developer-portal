@@ -140,7 +140,9 @@ function getReviewStatus(lastReviewedOn: string, reviewIn: string): 'ok' | 'warn
 type Params = { slug: string };
 
 export function generateStaticParams() {
-  return guidelines.map((g) => ({ slug: g.slug }));
+  return guidelines
+    .filter((g) => !('externalUrl' in g && (g as Record<string, unknown>).externalUrl))
+    .map((g) => ({ slug: g.slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<Params> }) {
@@ -212,22 +214,99 @@ If you have questions, reach out to the ${guideline.owner} team.
   );
 }
 
-// Minimal markdown-to-HTML for inline guideline content (ingested docs use proper remark pipeline)
+// Minimal markdown-to-HTML for inline guideline content, producing GOV.UK-styled markup
 function simpleMarkdown(md: string): string {
-  return md
-    .replace(/^### (.+)$/gm, '<h3 class="govuk-heading-m">$1</h3>')
-    .replace(/^## (.+)$/gm, '<h2 class="govuk-heading-l">$1</h2>')
-    .replace(/^# (.+)$/gm, '<h1 class="govuk-heading-xl">$1</h1>')
-    .replace(/```(\w*)\n([\s\S]*?)```/g, '<pre><code>$2</code></pre>')
-    .replace(/`([^`]+)`/g, '<code>$1</code>')
+  const lines = md.trim().split('\n');
+  const out: string[] = [];
+  let i = 0;
+
+  while (i < lines.length) {
+    const line = lines[i];
+
+    // Fenced code block
+    if (line.startsWith('```')) {
+      const codeLines: string[] = [];
+      i++;
+      while (i < lines.length && !lines[i].startsWith('```')) {
+        codeLines.push(lines[i]);
+        i++;
+      }
+      i++; // skip closing ```
+      out.push(`<pre class="app-code-block"><code>${escapeHtml(codeLines.join('\n'))}</code></pre>`);
+      continue;
+    }
+
+    // Headings
+    if (line.startsWith('### ')) {
+      out.push(`<h3 class="govuk-heading-s">${inline(line.slice(4))}</h3>`);
+      i++;
+      continue;
+    }
+    if (line.startsWith('## ')) {
+      out.push(`<h2 class="govuk-heading-m">${inline(line.slice(3))}</h2>`);
+      i++;
+      continue;
+    }
+    if (line.startsWith('# ')) {
+      out.push(`<h1 class="govuk-heading-l">${inline(line.slice(2))}</h1>`);
+      i++;
+      continue;
+    }
+
+    // Unordered list
+    if (line.startsWith('- ')) {
+      const items: string[] = [];
+      while (i < lines.length && lines[i].startsWith('- ')) {
+        items.push(`<li>${inline(lines[i].slice(2))}</li>`);
+        i++;
+      }
+      out.push(`<ul class="govuk-list govuk-list--bullet">${items.join('')}</ul>`);
+      continue;
+    }
+
+    // Ordered list
+    if (/^\d+\.\s/.test(line)) {
+      const items: string[] = [];
+      while (i < lines.length && /^\d+\.\s/.test(lines[i])) {
+        items.push(`<li>${inline(lines[i].replace(/^\d+\.\s/, ''))}</li>`);
+        i++;
+      }
+      out.push(`<ul class="govuk-list govuk-list--number">${items.join('')}</ul>`);
+      continue;
+    }
+
+    // Blank line — skip
+    if (line.trim() === '') {
+      i++;
+      continue;
+    }
+
+    // Paragraph — collect consecutive non-empty, non-special lines
+    const paraLines: string[] = [];
+    while (
+      i < lines.length &&
+      lines[i].trim() !== '' &&
+      !lines[i].startsWith('#') &&
+      !lines[i].startsWith('- ') &&
+      !lines[i].startsWith('```') &&
+      !/^\d+\.\s/.test(lines[i])
+    ) {
+      paraLines.push(lines[i]);
+      i++;
+    }
+    out.push(`<p class="govuk-body">${inline(paraLines.join(' '))}</p>`);
+  }
+
+  return out.join('\n');
+}
+
+function inline(text: string): string {
+  return text
     .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
-    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a class="govuk-link" href="$2">$1</a>')
-    .replace(/^- (.+)$/gm, '<li>$1</li>')
-    .replace(/(<li>.*<\/li>\n?)+/g, '<ul class="govuk-list govuk-list--bullet">$&</ul>')
-    .replace(/^(\d+)\. (.+)$/gm, '<li>$2</li>')
-    .replace(/\n\n/g, '</p><p class="govuk-body">')
-    .replace(/^(.+)$/gm, (line) => {
-      if (line.startsWith('<')) return line;
-      return line;
-    });
+    .replace(/`([^`]+)`/g, '<code>$1</code>')
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a class="govuk-link" href="$2">$1</a>');
+}
+
+function escapeHtml(text: string): string {
+  return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
