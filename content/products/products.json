@@ -39,7 +39,6 @@
     "description": "Take and process payments for government services. RESTful API with sandbox environment for testing.",
     "owner": "GDS",
     "slackChannel": "#govuk-pay",
-    "docsUrl": "/docs/govuk-pay",
     "externalUrl": "https://www.payments.service.gov.uk/",
     "status": "live",
     "tags": ["payments", "api", "gds"]
@@ -62,7 +61,6 @@
     "description": "OAuth2 authentication and authorisation service for Ministry of Magic digital services. Provides JWT tokens and role-based access control.",
     "owner": "Magical Security",
     "slackChannel": "#spellcheck-auth",
-    "docsUrl": "/docs/spellcheck-auth",
     "status": "live",
     "tags": ["authentication", "oauth2", "security"]
   },

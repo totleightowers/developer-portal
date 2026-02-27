@@ -14,14 +14,17 @@ export default function SearchWidget() {
   const [isOpen, setIsOpen] = useState(false);
   const [pagefind, setPagefind] = useState<any>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
 
   useEffect(() => {
     async function loadPagefind() {
       try {
         // Pagefind generates its JS in /pagefind/pagefind.js at build time
+        // and needs the basePath prefix on GitHub Pages.
+        const pagefindPath = `${basePath}/pagefind/pagefind.js`;
         const pf = await import(
-          // @ts-expect-error — dynamic import of pagefind
-          /* webpackIgnore: true */ '/pagefind/pagefind.js'
+          // @ts-ignore — dynamic runtime import of generated pagefind bundle
+          /* webpackIgnore: true */ pagefindPath
         );
         setPagefind(pf);
       } catch {
@@ -29,7 +32,7 @@ export default function SearchWidget() {
       }
     }
     loadPagefind();
-  }, []);
+  }, [basePath]);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -55,8 +58,13 @@ export default function SearchWidget() {
       const items: SearchResult[] = [];
       for (const r of search.results.slice(0, 8)) {
         const data = await r.data();
+        const rawUrl = data.url || '/';
+        const normalizedUrl =
+          basePath && rawUrl.startsWith('/') && !rawUrl.startsWith(`${basePath}/`)
+            ? `${basePath}${rawUrl}`
+            : rawUrl;
         items.push({
-          url: data.url,
+          url: normalizedUrl,
           title: data.meta?.title || 'Untitled',
           excerpt: data.excerpt,
         });
@@ -64,7 +72,7 @@ export default function SearchWidget() {
       setResults(items);
     }, 200);
     return () => clearTimeout(timer);
-  }, [query, pagefind]);
+  }, [query, pagefind, basePath]);
 
   return (
     <div className="portal-search-widget" ref={containerRef}>
