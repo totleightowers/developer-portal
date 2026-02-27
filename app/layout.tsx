@@ -10,6 +10,12 @@ export const metadata: Metadata = {
     default: 'Ministry of Magic Developer Portal',
   },
   description: 'The Ministry of Magic Developer Portal — documentation, products, and guidelines for cross-government developers.',
+  icons: {
+    icon: [
+      { url: '/assets/images/favicon.ico', sizes: 'any' },
+      { url: '/assets/images/favicon.svg', type: 'image/svg+xml' },
+    ],
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
