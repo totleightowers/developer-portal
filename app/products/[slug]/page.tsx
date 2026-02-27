@@ -4,6 +4,7 @@ import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { FeedbackWidget } from '@/components/FeedbackWidget';
 import { ChatBot } from '@/components/ChatBot';
 import products from '@/content/products/products.json';
+import sources from '@/sources.json';
 
 interface Product {
   slug: string;
@@ -38,6 +39,14 @@ export default async function ProductDetailPage({ params }: { params: Promise<Pa
   if (!product) {
     notFound();
   }
+
+  const sourceIds = new Set(
+    sources.sources
+      .filter((source) => source.enabled !== false)
+      .map((source) => source.id)
+  );
+  const docsSourceId = product.docsUrl?.replace(/^\/docs\//, '').split('/')[0];
+  const hasValidDocsLink = Boolean(docsSourceId && sourceIds.has(docsSourceId));
 
   const statusTag =
     product.status === 'live' ? (
@@ -88,7 +97,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<Pa
           </table>
 
           <div className="govuk-button-group">
-            {product.docsUrl && (
+            {product.docsUrl && hasValidDocsLink && (
               <Link href={product.docsUrl} className="govuk-button">
                 View documentation
               </Link>
