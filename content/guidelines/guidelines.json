@@ -1,0 +1,92 @@
+[
+  {
+    "slug": "choosing-hosting",
+    "title": "Choosing a hosting platform",
+    "phase": "inception",
+    "description": "How to decide between Cloud Platform, Modernisation Platform, and other hosting options for your service.",
+    "owner": "Cloud Platform team",
+    "lastReviewedOn": "2026-02-01",
+    "reviewIn": "6 months"
+  },
+  {
+    "slug": "service-assessments",
+    "title": "Preparing for service assessments",
+    "phase": "inception",
+    "description": "What to expect from GDS service assessments and how to prepare your team.",
+    "owner": "Digital Services",
+    "lastReviewedOn": "2026-01-15",
+    "reviewIn": "6 months"
+  },
+  {
+    "slug": "api-design-standards",
+    "title": "API design standards",
+    "phase": "development",
+    "description": "RESTful API design principles, versioning strategy, error handling, and pagination patterns.",
+    "owner": "Technical Architecture",
+    "lastReviewedOn": "2026-02-15",
+    "reviewIn": "3 months"
+  },
+  {
+    "slug": "source-control",
+    "title": "Source control and branching",
+    "phase": "development",
+    "description": "Git workflow standards, branch naming conventions, commit message formats, and code review expectations.",
+    "owner": "Operations Engineering",
+    "lastReviewedOn": "2025-12-01",
+    "reviewIn": "6 months"
+  },
+  {
+    "slug": "security-in-development",
+    "title": "Security in development",
+    "phase": "development",
+    "description": "Secure coding practices, dependency scanning, secret management, and threat modelling for development teams.",
+    "owner": "Security Engineering",
+    "lastReviewedOn": "2026-01-20",
+    "reviewIn": "3 months"
+  },
+  {
+    "slug": "technology-choices",
+    "title": "Making technology choices",
+    "phase": "technology",
+    "description": "Framework for evaluating and choosing programming languages, frameworks, and tools for your service.",
+    "owner": "Technical Architecture",
+    "lastReviewedOn": "2026-01-10",
+    "reviewIn": "6 months"
+  },
+  {
+    "slug": "open-source",
+    "title": "Coding in the open",
+    "phase": "technology",
+    "description": "When and how to make your code open source. Licensing, sensitive data, and the benefits of working in the open.",
+    "owner": "Operations Engineering",
+    "lastReviewedOn": "2025-11-15",
+    "reviewIn": "6 months"
+  },
+  {
+    "slug": "accessibility-requirements",
+    "title": "Accessibility requirements",
+    "phase": "standards",
+    "description": "WCAG 2.2 AA compliance requirements, testing approach, and accessibility statements for government services.",
+    "owner": "Frontend Community",
+    "lastReviewedOn": "2026-02-10",
+    "reviewIn": "3 months"
+  },
+  {
+    "slug": "incident-management",
+    "title": "Incident management",
+    "phase": "standards",
+    "description": "How to handle production incidents — severity levels, communication, runbooks, and post-incident reviews.",
+    "owner": "Operations Engineering",
+    "lastReviewedOn": "2026-01-05",
+    "reviewIn": "6 months"
+  },
+  {
+    "slug": "measuring-service-health",
+    "title": "Measuring service health",
+    "phase": "measuring",
+    "description": "Key metrics, SLIs/SLOs, monitoring dashboards, and how to report on service performance.",
+    "owner": "Cloud Platform team",
+    "lastReviewedOn": "2026-02-01",
+    "reviewIn": "6 months"
+  }
+]
