@@ -301,10 +301,14 @@ function simpleMarkdown(md: string): string {
 }
 
 function inline(text: string): string {
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
   return text
     .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
     .replace(/`([^`]+)`/g, '<code>$1</code>')
-    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a class="govuk-link" href="$2">$1</a>');
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_match, label, href) => {
+      const resolvedHref = href.startsWith('/') ? basePath + href : href;
+      return `<a class="govuk-link" href="${resolvedHref}">${label}</a>`;
+    });
 }
 
 function escapeHtml(text: string): string {
