@@ -23,7 +23,7 @@ export default function DocsIndex() {
               <span className="app-card__tag">{source.category}</span>
               <h2 className="govuk-heading-m app-card__title">
                 <Link
-                  href={`/docs/${source.slug}`}
+                  href={`/docs/${encodeURIComponent(source.slug)}`}
                   className="govuk-link app-card__title-link"
                 >
                   {source.name}
